@@ -77,8 +77,10 @@ module Google
     #   an array of events if many found.
     #
     def find_events_in_range(start_min, start_max)
-      formatted_start_min = start_min.strftime("%Y-%m-%dT%H:%M:%S")
-      formatted_start_max = start_max.strftime("%Y-%m-%dT%H:%M:%S")
+      # This only works in ruby 1.9
+      # Using rfc3339 to retain time zone
+      formatted_start_min = start_min.rfc3339 #strftime("%Y-%m-%dT%H:%M:%S")
+      formatted_start_max = start_max.rfc3339 #strftime("%Y-%m-%dT%H:%M:%S")
       event_lookup("?start-min=#{formatted_start_min}&start-max=#{formatted_start_max}")
     end
 
